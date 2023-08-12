@@ -21,11 +21,6 @@ When("I enter the code {string}") do |code|
   @session.add_code(code)
 end
 
-And("I enter the command {string}") do |command|
-  # This step is the same as the "When I enter the command" step, so you can call that step here
-  step "I enter the command \"#{command}\""
-end
-
 Then("the changes should be committed with the message {string}") do |message|
   # Verify that the changes were committed, possibly by checking the Git repository or the session state
   commit = @session.last_commit
