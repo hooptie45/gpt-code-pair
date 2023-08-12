@@ -53,6 +53,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'cucumber-rails', require: false
   gem 'pry'
+  gem 'database_cleaner'
 end
 
 group :development do
@@ -71,4 +72,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem "rspec"
+  gem "rspec-rails"
 end
