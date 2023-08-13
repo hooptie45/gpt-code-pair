@@ -1,14 +1,20 @@
+require 'git'
+require 'octokit'
+
 class InteractiveSessionService
   attr_reader :project, :files
-
-  def initialize
-    @project = nil
+  
+  def initialize(repository_url)
+    name = repository_url.split("/")[-1]
+    @project = Project.new(name: name)
+    dest = Rails.root.join("tmp", "my_app_#{Time.now.to_i}_#{rand(100)}")
+    @repo = GitService.new(repository_url, dest)
     @files = {}
   end
 
-  def create_project(name)
-    @project = Project.new(name: name)
+  def create_project!
     @project.save!
+    
     @project
   end
 
@@ -17,17 +23,12 @@ class InteractiveSessionService
   end
 
   def commit_changes(message)
-    # Assuming a Git repository is initialized and set up
-    git = Git.open(project.repository_path)
     files.each do |file_name, content|
-      File.write(File.join(project.repository_path, file_name), content)
-      git.add(file_name)
+      @repo.update_file(file_name, content)
     end
-    git.commit(message)
-    git.log.first
   end
 
   def read_file(file_name)
-    File.read(File.join(project.repository_path, file_name))
+    @repo.read_file(file_name)
   end
 end
