@@ -1,0 +1,389 @@
+diff --git a/landing-page/public/index.html b/landing-page/public/index.html
+new file mode 100644
+index 0000000..a1b2c3d
+--- /dev/null
++++ b/landing-page/public/index.html
+@@
++<!DOCTYPE html>
++<html lang="en">
++  <head>
++    <meta charset="utf-8" />
++    <title>Book Scene Visualizer - Bring Your Favorite Book Scenes to Life</title>
++    <meta name="description" content="Experience the world of your favorite books like never before. Visualize chapters, characters, and locations on demand with AI-powered art." />
++    <meta name="viewport" content="width=device-width, initial-scale=1" />
++    
++    <!-- Open Graph / Facebook -->
++    <meta property="og:title" content="Book Scene Visualizer" />
++    <meta property="og:description" content="Visualize chapters, characters, and locations on demand with AI-powered art." />
++    <meta property="og:image" content="/path/to/social-share-image.jpg" />
++    <meta property="og:url" content="https://LitScenes.com" />
++    
++    <!-- Twitter -->
++    <meta name="twitter:card" content="summary_large_image" />
++
++    <!-- Canonical URL -->
++    <link rel="canonical" href="https://LitScenes.com" />
++
++    <!-- Google Fonts -->
++    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" />
++  </head>
++  <body>
++    <div id="root"></div>
++  </body>
++</html>
+diff --git a/landing-page/src/App.tsx b/landing-page/src/App.tsx
+new file mode 100644
+index 0000000..b2c3d4e
+--- /dev/null
++++ b/landing-page/src/App.tsx
+@@
++import React from 'react';
++import { Helmet } from 'react-helmet';
++import './App.css';
++
++const App: React.FC = () => {
++  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
++    event.preventDefault();
++    // In production, send the email to your backend
++    alert('Thank you for signing up!');
++  };
++
++  return (
++    <div className="App">
++      <Helmet>
++        <title>Book Scene Visualizer - Bring Your Favorite Book Scenes to Life</title>
++        <meta name="description" content="Experience the world of your favorite books like never before. Visualize chapters, characters, and locations on demand with AI-powered art." />
++        {/* Structured Data for SEO */}
++        <script type="application/ld+json">
++          {`
++            {
++              "@context": "https://schema.org",
++              "@type": "WebSite",
++              "name": "Book Scene Visualizer",
++              "url": "https://LitScenes.com",
++              "potentialAction": {
++                "@type": "SearchAction",
++                "target": "https://LitScenes.com/?q={search_term_string}",
++                "query-input": "required name=search_term_string"
++              }
++            }
++          `}
++        </script>
++      </Helmet>
++
++      <header>
++        <h1>Bring Your Favorite Book Scenes to Life</h1>
++        <p>Visualize chapters, characters, and locations on demand with AI-powered art.</p>
++      </header>
++      <section>
++        <form onSubmit={handleSubmit}>
++          <input type="email" placeholder="Enter your email" required />
++          <button type="submit">Join Early Access</button>
++        </form>
++      </section>
++    </div>
++  );
++};
++
++export default App;
+diff --git a/landing-page/src/App.css b/landing-page/src/App.css
+new file mode 100644
+index 0000000..c3d4e5f
+--- /dev/null
++++ b/landing-page/src/App.css
+@@
++/* Apply a gradient background and use the Roboto font */
++body {
++  margin: 0;
++  padding: 0;
++  font-family: 'Roboto', sans-serif;
++  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
++  min-height: 100vh;
++  display: flex;
++  align-items: center;
++  justify-content: center;
++}
++
++/* Main container with a modern card design */
++.App {
++  background: #ffffff;
++  border-radius: 10px;
++  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
++  padding: 40px 20px;
++  max-width: 600px;
++  width: 90%;
++  text-align: center;
++}
++
++/* Header styling */
++header {
++  margin-bottom: 20px;
++}
++header h1 {
++  font-size: 2.5rem;
++  margin-bottom: 10px;
++  color: #333;
++}
++header p {
++  font-size: 1.2rem;
++  color: #666;
++}
++
++/* Form styling */
++form {
++  display: flex;
++  flex-direction: column;
++  align-items: center;
++}
++form input {
++  padding: 12px;
++  font-size: 1rem;
++  width: 100%;
++  max-width: 400px;
++  border: 2px solid #ddd;
++  border-radius: 5px;
++  margin-bottom: 20px;
++  transition: border 0.3s;
++}
++form input:focus {
++  outline: none;
++  border: 2px solid #007bff;
++}
++form button {
++  padding: 12px 20px;
++  font-size: 1rem;
++  background-color: #007bff;
++  color: #fff;
++  border: none;
++  border-radius: 5px;
++  cursor: pointer;
++  transition: background-color 0.3s;
++}
++form button:hover {
++  background-color: #0056b3;
++}
+diff --git a/landing-page/src/index.tsx b/landing-page/src/index.tsx
+new file mode 100644
+index 0000000..d4e5f6a
+--- /dev/null
++++ b/landing-page/src/index.tsx
+@@
++import React from 'react';
++import ReactDOM from 'react-dom';
++import App from './App';
++
++ReactDOM.render(
++  <React.StrictMode>
++    <App />
++  </React.StrictMode>,
++  document.getElementById('root')
++);
+diff --git a/landing-page/package.json b/landing-page/package.json
+new file mode 100644
+index 0000000..e5f6a7b
+--- /dev/null
++++ b/landing-page/package.json
+@@
+-{
+-  "name": "landing-page",
+-  "version": "1.0.0",
+-  "private": true,
+-  "dependencies": {
+-    "react": "^18.2.0",
+-    "react-dom": "^18.2.0",
+-    "react-helmet": "^6.1.0"
+-  },
+-  "devDependencies": {
+-    "@types/react": "^18.0.0",
+-    "@types/react-dom": "^18.0.0",
+-    "typescript": "^4.8.0"
+-  },
+-  "scripts": {
+-    "start": "react-scripts start",
+-    "build": "react-scripts build"
+-  }
+-}
++{
++  "name": "landing-page",
++  "version": "1.0.0",
++  "private": true,
++  "dependencies": {
++    "react": "^18.2.0",
++    "react-dom": "^18.2.0",
++    "react-helmet": "^6.1.0"
++  },
++  "devDependencies": {
++    "@types/react": "^18.0.0",
++    "@types/react-dom": "^18.0.0",
++    "typescript": "^4.8.0"
++  },
++  "scripts": {
++    "start": "react-scripts start",
++    "build": "react-scripts build"
++  }
++}
+diff --git a/landing-page/tsconfig.json b/landing-page/tsconfig.json
+new file mode 100644
+index 0000000..f6a7b8c
+--- /dev/null
++++ b/landing-page/tsconfig.json
+@@
++{
++  "compilerOptions": {
++    "target": "ES5",
++    "lib": ["dom", "dom.iterable", "esnext"],
++    "allowJs": true,
++    "skipLibCheck": true,
++    "esModuleInterop": true,
++    "allowSyntheticDefaultImports": true,
++    "strict": true,
++    "forceConsistentCasingInFileNames": true,
++    "noFallthroughCasesInSwitch": true,
++    "module": "ESNext",
++    "moduleResolution": "node",
++    "resolveJsonModule": true,
++    "isolatedModules": true,
++    "jsx": "react-jsx"
++  },
++  "include": ["src"]
++}
+diff --git a/cdk/lib/landing-page-stack.ts b/cdk/lib/landing-page-stack.ts
+new file mode 100644
+index 0000000..a7b8c9d
+--- /dev/null
++++ b/cdk/lib/landing-page-stack.ts
+@@
++import * as cdk from 'aws-cdk-lib';
++import { Construct } from 'constructs';
++import * as s3 from 'aws-cdk-lib/aws-s3';
++import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
++import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
++import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
++import * as route53 from 'aws-cdk-lib/aws-route53';
++import * as targets from 'aws-cdk-lib/aws-route53-targets';
++import * as acm from 'aws-cdk-lib/aws-certificatemanager';
++
++export class LandingPageStack extends cdk.Stack {
++  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
++    super(scope, id, props);
++
++    // Create an S3 bucket to host the landing page
++    const websiteBucket = new s3.Bucket(this, 'LandingPageBucket', {
++      websiteIndexDocument: 'index.html',
++      publicReadAccess: true,
++      removalPolicy: cdk.RemovalPolicy.DESTROY, // Not for production use!
++      autoDeleteObjects: true,                // Not for production use!
++    });
++
++    // Look up the existing hosted zone for LitScenes.com
++    const hostedZone = route53.HostedZone.fromLookup(this, 'HostedZone', {
++      domainName: 'LitScenes.com',
++    });
++
++    // Create an ACM certificate for LitScenes.com and www.LitScenes.com validated via DNS
++    const certificate = new acm.Certificate(this, 'SiteCertificate', {
++      domainName: 'LitScenes.com',
++      subjectAlternativeNames: ['www.LitScenes.com'],
++      validation: acm.CertificateValidation.fromDns(hostedZone),
++    });
++
++    // Create a CloudFront distribution with custom domain names and certificate
++    const distribution = new cloudfront.Distribution(this, 'LandingPageDistribution', {
++      defaultBehavior: {
++        origin: new origins.S3Origin(websiteBucket),
++        viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
++      },
++      domainNames: ['LitScenes.com', 'www.LitScenes.com'],
++      certificate: certificate,
++    });
++
++    // Deploy the React build output to the S3 bucket
++    new s3deploy.BucketDeployment(this, 'DeployLandingPage', {
++      sources: [s3deploy.Source.asset('../landing-page/build')],
++      destinationBucket: websiteBucket,
++      distribution,
++      distributionPaths: ['/*'],
++    });
++
++    // Create Route 53 A record for the root domain
++    new route53.ARecord(this, 'AliasRecord', {
++      zone: hostedZone,
++      recordName: 'LitScenes.com',
++      target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
++    });
++
++    // Create Route 53 A record for the www subdomain
++    new route53.ARecord(this, 'WWWAliasRecord', {
++      zone: hostedZone,
++      recordName: 'www.LitScenes.com',
++      target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
++    });
++
++    // Output the CloudFront URL and custom domain URL
++    new cdk.CfnOutput(this, 'CloudFrontURL', {
++      value: distribution.domainName,
++      description: 'URL of the deployed CloudFront distribution',
++    });
++    new cdk.CfnOutput(this, 'WebsiteURL', {
++      value: 'https://LitScenes.com',
++      description: 'Custom domain for the landing page',
++    });
++  }
++}
+diff --git a/cdk/bin/landing-page.ts b/cdk/bin/landing-page.ts
+new file mode 100644
+index 0000000..b8c9d0e
+--- /dev/null
++++ b/cdk/bin/landing-page.ts
+@@
++#!/usr/bin/env node
++import * as cdk from 'aws-cdk-lib';
++import { LandingPageStack } from '../lib/landing-page-stack';
++
++const app = new cdk.App();
++new LandingPageStack(app, 'LandingPageStack');
+diff --git a/cdk/package.json b/cdk/package.json
+new file mode 100644
+index 0000000..c9d0e1f
+--- /dev/null
++++ b/cdk/package.json
+@@
++{
++  "name": "cdk",
++  "version": "1.0.0",
++  "bin": {
++    "landing-page": "bin/landing-page.js"
++  },
++  "scripts": {
++    "build": "tsc",
++    "watch": "tsc -w",
++    "cdk": "cdk"
++  },
++  "dependencies": {
++    "aws-cdk-lib": "^2.60.0",
++    "constructs": "^10.0.0"
++  },
++  "devDependencies": {
++    "@types/node": "^16.0.0",
++    "typescript": "^4.8.0"
++  }
++}
+diff --git a/cdk/tsconfig.json b/cdk/tsconfig.json
+new file mode 100644
+index 0000000..d0e1f2a
+--- /dev/null
++++ b/cdk/tsconfig.json
+@@
++{
++  "compilerOptions": {
++    "target": "ES2020",
++    "module": "CommonJS",
++    "lib": ["es2020"],
++    "outDir": "lib",
++    "rootDir": ".",
++    "strict": true,
++    "esModuleInterop": true,
++    "forceConsistentCasingInFileNames": true
++  },
++  "exclude": ["node_modules", "cdk.out"]
++}
